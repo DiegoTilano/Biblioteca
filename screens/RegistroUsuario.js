@@ -40,7 +40,9 @@ export default function RegistroUsuario() {
     }
     addUser({ nombre, correo, contrasena });
     Alert.alert("Éxito", "Usuario registrado con éxito!");
-    window.alert("Usuario registrado con éxito!");
+    setNombre('')
+    setCorreo('')
+    setContrasena('')
   };
 
   return (

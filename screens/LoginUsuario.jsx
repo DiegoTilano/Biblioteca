@@ -2,13 +2,12 @@ import React, { useState, useContext } from "react";
 import { View, TextInput, Button, Text, Alert } from "react-native";
 import { UserContext } from "../context/UserContext";
 import Auth from "../services/auth";
-import { ImageBackground } from "react-native-web";
 
 export default function LoginUsuario() {
   const auth = new Auth();
 
-  const [correo, setCorreo] = useState("alexander@gmail.com");
-  const [contrasena, setContrasena] = useState("alexander");
+  const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
   const { addUser } = useContext(UserContext);
 
   const handleLogin = async () => {
@@ -32,7 +31,8 @@ export default function LoginUsuario() {
     }
     addUser({ nombre: user.name, correo, contrasena });
     Alert.alert("Éxito", `${user.name} has iniciado sesion`);
-    window.alert(`${user.name} has iniciado sesion`);
+    setCorreo('')
+    setContrasena('')
   };
 
   return (

@@ -42,7 +42,7 @@ export default function ListaLibros() {
         }}
       >
         <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
-          Bienvenido a la biblioteca
+          {currentUser.nombre} bienvenido a la biblioteca
         </Text>
       </View>
       {/* Aquí iría el componente para listar y alquilar libros */}
