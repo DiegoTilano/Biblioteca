@@ -81,6 +81,7 @@ const styles = {
     width: "100%",
     height: "100%",
     padding: 10,
+    backgroundImage: 'url("https://www.comunidadbaratz.com/wp-content/uploads/Todas-las-bibliotecas-son-bellas-por-el-servicio-que-ofrecen-a-sus-comunidades.jpg")'
   },
   input: {
     width: "90%",
@@ -89,6 +90,7 @@ const styles = {
     paddingLeft: 20,
     fontSize: 15,
     borderRadius: 12,
+    backgroundColor: '#f9f9f9'
   },
   button: {
     width: 300,
