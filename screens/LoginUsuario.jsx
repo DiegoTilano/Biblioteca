@@ -3,54 +3,42 @@ import { View, TextInput, Button, Text, Alert } from "react-native";
 import { UserContext } from "../context/UserContext";
 import Auth from "../services/auth";
 
-export default function RegistroUsuario() {
+export default function LoginUsuario() {
   const auth = new Auth();
 
-  const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const { addUser } = useContext(UserContext);
 
-  const handleRegister = async () => {
-    if (!nombre.match(/^[a-zA-Z ]*$/)) {
-      Alert.alert("Error", "El nombre no debe contener números.");
-      return;
-    }
+  const handleLogin = async () => {
 
-    const newUser = await auth.register({
-      name: nombre.trim(),
+    const user = await auth.login({
       email: correo.trim(),
       password: contrasena,
     });
 
-    if (!newUser.ok) {
-      if (newUser.errors) {
-        const errors = Object.values(newUser.errors).map(
+    if (!user.ok) {
+      if (user.errors) {
+        const errors = Object.values(user.errors).map(
           (infoErr) => infoErr.msg
         );
         Alert.alert("Error", errors.join("\n"));
         window.alert(errors.join("\n"));
         return;
       }
-      if (newUser.msg) {
-        Alert.alert("Error", newUser.msg);
-        window.alert(newUser.msg);
+      if (user.msg) {
+        Alert.alert("Error", user.msg);
+        window.alert(user.msg);
         return;
       }
     }
-    addUser({ nombre, correo, contrasena });
-    Alert.alert("Éxito", "Usuario registrado con éxito!");
-    window.alert("Usuario registrado con éxito!");
+    addUser({ nombre: user.name, correo, contrasena });
+    Alert.alert("Éxito", `${user.name} has iniciado sesion`);
+    window.alert(`${user.name} has iniciado sesion`);
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={nombre}
-        onChangeText={setNombre}
-        placeholder="Ingrese su nombre"
-      />
       <TextInput
         style={{ ...styles.input, marginTop: 10 }}
         value={correo}
@@ -66,8 +54,8 @@ export default function RegistroUsuario() {
       />
       <Button
         style={styles.button}
-        title="Registrar"
-        onPress={handleRegister}
+        title="Iniciar sesion"
+        onPress={handleLogin}
       />
     </View>
   );
